@@ -1,0 +1,102 @@
+erDiagram
+    USUARIO {
+        int idUsuario PK
+        int idTipoDocumento FK
+        int Identificacion
+        string Nombres
+        string Apellidos
+        string email 
+        string password
+        int idRol FK
+        int idArea FK
+        date fechaCreacion
+        date fechaActualizacion
+    }
+
+    ROL {
+        int idRol PK
+        string nombreRol
+    }
+
+    CANDIDATO {
+        int idCandidato PK
+        int idTipoDocumento FK
+        int Identificacion
+        string Nombres
+        string Apellidos
+        date fechaNacimiento
+        date fechaCreacion
+        date fechaActualizacion
+    }
+
+    CONTACTO {
+        int idContacto PK
+        int idCandidato FK
+        string tipoContacto
+        string valor
+    }
+
+    VACANTE {
+        int idVacante PK
+        string Descripcion
+        string perfil
+        int idArea FK
+        date fechaLimite
+        date fechaCreacion
+        date fechaActualizacion
+    }
+
+    AREA {
+        int idArea PK
+        string codigo
+        string nombreArea
+    }
+
+    NIVEL_TECNICO {
+        int nivelTecnicoId PK
+        string Nombre
+    }
+
+    TIPO_DOCUMENTO {
+        int idTipoDocumento PK
+        string codigo
+        string nombreTipoDocumento
+    }
+
+    POSTULACION {
+        int idPostulacion PK
+        int idCandidato FK
+        int idVacante FK
+        int idEstadoCandidato FK
+        date fechaPostulacion
+    }
+
+    ESTADOS_CANDIDATOS {
+        int idEstadoCandidato PK
+        string nombreEstado
+    }
+
+    VACANTE_NIVEL_TECNICO {
+        int reVacantenivelTecnico PK
+        int idVacante FK
+        int nivelTecnicoId FK
+    }
+
+    USUARIO ||--o{ ROL : "Tiene un"
+    USUARIO ||--o{ VACANTE : "Puede gestionar"
+    USUARIO }|--|| TIPO_DOCUMENTO : "Tiene un"
+    USUARIO }|--|| AREA : "Puede pertenecer a un área"
+
+    CANDIDATO ||--o{ CONTACTO : "Tiene múltiples"
+    CANDIDATO }|--|| TIPO_DOCUMENTO : "Tiene un"
+    CANDIDATO ||--o{ POSTULACION : "Se postula a"
+    CANDIDATO }|--|| NIVEL_TECNICO : "Tiene un"
+
+    VACANTE }|--|| AREA : "Pertenece a"
+    VACANTE ||--o{ POSTULACION : "Recibe postulaciones"
+    VACANTE ||--o{ VACANTE_NIVEL_TECNICO : "Puede requerir varios"
+
+    POSTULACION }|--|| ESTADOS_CANDIDATOS : "Tiene un estado"
+
+    VACANTE_NIVEL_TECNICO }|--|| VACANTE : "Asocia"
+    VACANTE_NIVEL_TECNICO }|--|| NIVEL_TECNICO : "Requiere"

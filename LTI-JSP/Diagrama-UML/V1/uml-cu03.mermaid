@@ -1,0 +1,16 @@
+graph TD
+    A([Reclutador]) --> B{Pipeline}
+    B --> C[Ver Candidatos]
+    C --> D[Nuevos]
+    C --> E[En Revisión]
+    C --> F[Entrevista]
+    C --> G[Evaluación]
+    C --> H[Seleccionado]
+    B --> I[Mover Candidatos]
+    I --> J[Registrar Cambios]
+    J --> K[Enviar Notificaciones]
+    B --> L[Filtrar Candidatos]
+    B --> M[Agregar Notas]
+    B --> N[Descartar Candidatos]
+    style A fill:#f9f,stroke:#333
+    style B fill:#bbf,stroke:#333

@@ -1,0 +1,57 @@
+erDiagram
+    RECLUTADOR {
+        int idReclutador PK
+        int idTipoDocumento FK
+        int Identificacion
+        string Nombres
+        string Apellidos
+        string mail
+        int idArea FK
+    }
+    
+    CANDIDATO {
+        int idCandidato PK
+        int idTipoDocumento FK
+        int Identificacion
+        string Nombres
+        string Apellidos
+        string mail
+        date fechaNacimiento
+    }
+    
+    VACANTE {
+        int idVacante PK
+        string Descripcion
+        string perfil
+        int idArea FK
+        date fechaLimite
+        int nivelTecnicoId FK
+    }
+    
+    AREA {
+        int idArea PK
+        string codigo
+        string nombreArea
+    }
+    
+    NIVEL_TECNICO {
+        int nivelTecnicoId PK
+        string Nombre
+    }
+    
+    TIPO_DOCUMENTO {
+        int idTipoDocumento PK
+        string codigo
+        string nombreTipoDocumento
+    }
+    
+    RECLUTADOR ||--o{ AREA : "Puede gestionar"
+    RECLUTADOR ||--o{ VACANTE : "Gestiona"
+    RECLUTADOR }|--|| TIPO_DOCUMENTO : "Tiene un"
+    
+    CANDIDATO }|--|| TIPO_DOCUMENTO : "Tiene un"
+    CANDIDATO }|--|| NIVEL_TECNICO : "Tiene un"
+    CANDIDATO ||--o{ VACANTE : "Postula a"
+    
+    VACANTE }|--|| AREA : "Pertenece a"
+    VACANTE ||--o{ NIVEL_TECNICO : "Puede requerir"
