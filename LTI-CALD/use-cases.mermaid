@@ -1,0 +1,23 @@
+stateDiagram-v2
+    [*] --> GestionCandidatos
+
+    state GestionCandidatos {
+        [*] --> SmartMatching
+        [*] --> ColaboracionTiempoReal
+        [*] --> AutomatizacionProcesos
+
+        state SmartMatching {
+            AnalizarCV --> EvaluarMatch
+            EvaluarMatch --> RecomendarCandidatos
+        }
+
+        state ColaboracionTiempoReal {
+            CompartirFeedback --> ProgramarEntrevistas
+            ProgramarEntrevistas --> ActualizarEstado
+        }
+
+        state AutomatizacionProcesos {
+            ScreeningInicial --> EnviarComunicaciones
+            EnviarComunicaciones --> SeguimientoAutomatico
+        }
+    }

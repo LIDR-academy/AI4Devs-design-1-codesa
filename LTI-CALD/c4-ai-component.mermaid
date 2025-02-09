@@ -1,0 +1,52 @@
+graph TB
+    subgraph Context
+        UI[Web Interface]
+        API[API Gateway]
+        AI[AI System]
+        DB[(Database)]
+    end
+
+    subgraph Containers
+        subgraph "AI System"
+            ML[ML Service]
+            NLP[NLP Service]
+            Matching[Matching Engine]
+            Pipeline[Data Pipeline]
+        end
+    end
+
+    subgraph Components
+        subgraph "Matching Engine"
+            Profile[Profile Analyzer]
+            Score[Score Calculator]
+            Rank[Ranking System]
+            Learn[Learning Module]
+        end
+    end
+
+    subgraph Code
+        subgraph "Score Calculator"
+            Init[Initialize Weights]
+            Calc[Calculate Scores]
+            Adjust[Adjust Factors]
+            Update[Update Model]
+        end
+    end
+
+    UI --> API
+    API --> AI
+    AI --> DB
+    
+    ML --> Pipeline
+    NLP --> Pipeline
+    Matching --> Pipeline
+    
+    Profile --> Score
+    Score --> Rank
+    Rank --> Learn
+    Learn --> Profile
+
+    Init --> Calc
+    Calc --> Adjust
+    Adjust --> Update
+    Update --> Init
