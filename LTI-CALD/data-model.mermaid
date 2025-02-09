@@ -1,0 +1,60 @@
+erDiagram
+    CANDIDATE ||--o{ APPLICATION : submits
+    JOB_POSTING ||--o{ APPLICATION : receives
+    USER ||--o{ EVALUATION : creates
+    CANDIDATE ||--o{ EVALUATION : receives
+    COMPANY ||--o{ JOB_POSTING : creates
+    TEAM ||--o{ USER : contains
+
+    CANDIDATE {
+        uuid id PK
+        string first_name
+        string last_name
+        string email
+        jsonb skills
+        jsonb experience
+        timestamp created_at
+        enum status
+    }
+
+    JOB_POSTING {
+        uuid id PK
+        string title
+        text description
+        jsonb requirements
+        enum status
+        uuid company_id FK
+        timestamp posted_at
+    }
+
+    APPLICATION {
+        uuid id PK
+        uuid candidate_id FK
+        uuid job_id FK
+        enum status
+        jsonb screening_results
+        timestamp applied_at
+    }
+
+    EVALUATION {
+        uuid id PK
+        uuid candidate_id FK
+        uuid user_id FK
+        integer score
+        text feedback
+        timestamp evaluated_at
+    }
+
+    COMPANY {
+        uuid id PK
+        string name
+        string industry
+        jsonb settings
+    }
+
+    TEAM {
+        uuid id PK
+        uuid company_id FK
+        string name
+        enum type
+    }

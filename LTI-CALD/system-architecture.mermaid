@@ -1,0 +1,30 @@
+graph TB
+    subgraph Frontend
+    UI[UI React]
+    end
+    
+    subgraph Backend
+    API[API Gateway]
+    Auth[Auth Service]
+    Candidates[Candidate Service]
+    Jobs[Job Service]
+    Evaluation[Evaluation Service]
+    AI[AI Service]
+    end
+    
+    subgraph Database
+    DB[(PostgreSQL)]
+    Cache[(Redis)]
+    end
+    
+    UI --> API
+    API --> Auth
+    API --> Candidates
+    API --> Jobs
+    API --> Evaluation
+    API --> AI
+    
+    Candidates --> DB
+    Jobs --> DB
+    Evaluation --> DB
+    AI --> Cache
