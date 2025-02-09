@@ -1,0 +1,25 @@
+sequenceDiagram
+    actor C as Candidato
+    participant P as Portal de Empleos
+    participant S as Sistema ATS
+    participant R as Reclutador
+    participant D as Base de Datos
+
+    C->>P: Acceder al portal
+    P->>C: Mostrar vacantes disponibles
+    C->>P: Seleccionar vacante
+    C->>P: Completar formulario
+    C->>P: Subir CV
+    P->>S: Enviar aplicación
+    S->>D: Almacenar datos
+    S->>S: Analizar CV
+    S->>R: Notificar nueva aplicación
+    
+    alt CV cumple requisitos
+        R->>S: Revisar aplicación
+        R->>S: Aprobar para siguiente fase
+        S->>C: Notificar aprobación
+    else CV no cumple
+        R->>S: Rechazar aplicación
+        S->>C: Notificar rechazo
+    end

@@ -1,0 +1,38 @@
+sequenceDiagram
+    actor R as Reclutador
+    actor HM as Hiring Manager
+    participant S as Sistema ATS
+    participant N as Notificaciones
+    actor C as Candidato
+
+    Note over R,S: Inicio del proceso
+    R->>S: Acceder al pipeline
+    S-->>R: Mostrar candidatos por etapa
+
+    Note over R,S: Screening Inicial
+    R->>S: Evaluar perfil del candidato
+    R->>S: Aprobar para entrevista
+    S->>N: Solicitar programación
+
+    Note over R,C: Entrevista RRHH
+    N->>C: Enviar invitación entrevista
+    C->>S: Confirmar asistencia
+    R->>S: Registrar resultado entrevista
+    S->>N: Notificar resultado
+
+    Note over HM,C: Entrevista Técnica
+    R->>HM: Solicitar entrevista técnica
+    HM->>S: Agendar entrevista
+    N->>C: Enviar nueva invitación
+    HM->>S: Registrar evaluación técnica
+
+    Note over R,C: Decisión Final
+    alt Candidato Aprobado
+        R->>S: Aprobar candidato
+        S->>N: Generar oferta laboral
+        N->>C: Enviar oferta
+    else Candidato Rechazado
+        R->>S: Rechazar candidato
+        S->>N: Preparar notificación
+        N->>C: Enviar rechazo
+    end
