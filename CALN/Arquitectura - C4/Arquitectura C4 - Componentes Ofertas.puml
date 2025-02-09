@@ -1,0 +1,25 @@
+@startuml
+title "Diagrama C4 - Nivel 3: Componentes (Servicio de Ofertas)"
+
+package "Servicio de Ofertas (Spring Boot)" {
+  
+  rectangle "OfertaController" as Controller
+  rectangle "OfertaService" as Service
+  rectangle "OfertaRepository" as Repository
+  rectangle "KafkaProducer" as KafkaProducer
+  rectangle "OfertaEntity" as Entity
+  
+  database "DB Ofertas (Oracle)" as DB_Ofertas
+  
+  Controller --> Service : "Llama a"
+  Service --> Repository : "Accede a"
+  Repository --> DB_Ofertas : "Guarda/Consulta"
+  
+  Service --> KafkaProducer : "Envía eventos a Kafka"
+  
+  KafkaProducer --> "Bus de Eventos (Kafka)"
+  
+  Entity -[hidden]-> Repository
+}
+
+@enduml

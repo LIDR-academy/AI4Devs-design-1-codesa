@@ -1,0 +1,19 @@
+@startuml
+actor Reclutador
+actor Candidato
+
+rectangle "Sistema de Gestión de Candidatos (ATS)" {
+    
+    usecase "Publicar y Gestionar Ofertas" as U1
+    usecase "Captura y Gestión de Candidatos" as U2
+    usecase "Seguimiento y Evaluación de Candidatos" as U3
+
+    Reclutador --> U1
+    Reclutador --> U2
+    Reclutador --> U3
+
+    Candidato --> (Aplicar a Oferta)
+    (Aplicar a Oferta) --> U2
+    (Recibir Notificación de Estado) <-- U3
+}
+@enduml

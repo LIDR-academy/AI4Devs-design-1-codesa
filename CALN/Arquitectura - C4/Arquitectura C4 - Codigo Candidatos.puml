@@ -1,0 +1,45 @@
+@startuml
+title "Diagrama C4 - Nivel 4: Código (Servicio de Candidatos)"
+
+class CandidatoController {
+    +postularCandidato(candidatoDTO: CandidatoDTO): ResponseEntity<CandidatoDTO>
+    +obtenerCandidatos(): List<CandidatoDTO>
+    +obtenerCandidatoPorId(id: Long): CandidatoDTO
+}
+
+class CandidatoService {
+    +postularCandidato(candidatoDTO: CandidatoDTO): CandidatoDTO
+    +obtenerCandidatos(): List<CandidatoDTO>
+    +obtenerCandidatoPorId(id: Long): CandidatoDTO
+}
+
+class CandidatoRepository {
+    +save(candidato: CandidatoEntity): CandidatoEntity
+    +findById(id: Long): Optional<CandidatoEntity>
+    +findAll(): List<CandidatoEntity>
+}
+
+class CandidatoEntity {
+    Long id
+    String nombre
+    String email
+    String telefono
+    String cvUrl
+    Date fechaPostulacion
+}
+
+class KafkaProducer {
+    +enviarEventoCandidatoPostulado(candidatoDTO: CandidatoDTO): void
+}
+
+class KafkaConsumer {
+    +procesarEventoOfertaPublicada(ofertaDTO: OfertaDTO): void
+}
+
+CandidatoController --> CandidatoService
+CandidatoService --> CandidatoRepository
+CandidatoService --> KafkaProducer
+KafkaConsumer --> CandidatoService
+CandidatoRepository --> CandidatoEntity
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+actor Candidato
+actor Reclutador
+
+rectangle "Captura y Gestión de Candidatos" {
+    usecase "Aplicar a Oferta" as U1
+    usecase "Subir CV y Datos Personales" as U2
+    usecase "Revisar y Filtrar Candidatos" as U3
+    usecase "Actualizar Estado del Candidato" as U4
+}
+
+Candidato --> U1
+U1 --> U2
+Reclutador --> U3
+Reclutador --> U4
+@enduml

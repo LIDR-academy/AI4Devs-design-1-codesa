@@ -1,0 +1,39 @@
+@startuml
+title "Diagrama C4 - Nivel 4: Código (Servicio de Ofertas)"
+
+class OfertaController {
+    +crearOferta(ofertaDTO: OfertaDTO): ResponseEntity<OfertaDTO>
+    +obtenerOfertas(): List<OfertaDTO>
+    +obtenerOfertaPorId(id: Long): OfertaDTO
+}
+
+class OfertaService {
+    +crearOferta(ofertaDTO: OfertaDTO): OfertaDTO
+    +obtenerOfertas(): List<OfertaDTO>
+    +obtenerOfertaPorId(id: Long): OfertaDTO
+}
+
+class OfertaRepository {
+    +save(oferta: OfertaEntity): OfertaEntity
+    +findById(id: Long): Optional<OfertaEntity>
+    +findAll(): List<OfertaEntity>
+}
+
+class OfertaEntity {
+    Long id
+    String titulo
+    String descripcion
+    String empresa
+    Date fechaPublicacion
+}
+
+class KafkaProducer {
+    +enviarEventoOfertaPublicada(ofertaDTO: OfertaDTO): void
+}
+
+OfertaController --> OfertaService
+OfertaService --> OfertaRepository
+OfertaService --> KafkaProducer
+OfertaRepository --> OfertaEntity
+
+@enduml
