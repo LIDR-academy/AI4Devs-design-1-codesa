@@ -1,0 +1,61 @@
+@startuml
+title "Diagrama C4 - Nivel 2: Contenedores"
+
+actor "Reclutador" as Reclutador
+actor "Candidato" as Candidato
+actor "Administrador" as Administrador
+
+package "Sistema de Gestión de Candidatos (ATS)" {
+  
+  node "Frontend (Microfrontends)" {
+    rectangle "Portal de Reclutadores (Angular)" as UI_Reclutadores
+    rectangle "Portal de Candidatos (Angular)" as UI_Candidatos
+  }
+
+  node "API Gateway (Spring Cloud Gateway)" as APIGateway
+  
+  node "Microservicios (Spring Boot)" {
+    rectangle "Servicio de Ofertas" as MS_Ofertas
+    rectangle "Servicio de Candidatos" as MS_Candidatos
+    rectangle "Servicio de Evaluaciones" as MS_Evaluaciones
+  }
+
+  node "Base de Datos (Oracle)" {
+    database "DB Ofertas" as DB_Ofertas
+    database "DB Candidatos" as DB_Candidatos
+    database "DB Evaluaciones" as DB_Evaluaciones
+  }
+
+  node "Mensajería (Kafka)" {
+    queue "Bus de Eventos" as Kafka
+  }
+
+  node "Infraestructura (Kubernetes)" {
+    rectangle "Contenedores Docker"
+  }
+}
+
+Reclutador --> UI_Reclutadores
+Candidato --> UI_Candidatos
+Administrador --> UI_Reclutadores
+
+UI_Reclutadores --> APIGateway
+UI_Candidatos --> APIGateway
+
+APIGateway --> MS_Ofertas
+APIGateway --> MS_Candidatos
+APIGateway --> MS_Evaluaciones
+
+MS_Ofertas --> DB_Ofertas
+MS_Candidatos --> DB_Candidatos
+MS_Evaluaciones --> DB_Evaluaciones
+
+MS_Ofertas <--> Kafka
+MS_Candidatos <--> Kafka
+MS_Evaluaciones <--> Kafka
+
+MS_Ofertas --> "Contenedores Docker"
+MS_Candidatos --> "Contenedores Docker"
+MS_Evaluaciones --> "Contenedores Docker"
+
+@enduml

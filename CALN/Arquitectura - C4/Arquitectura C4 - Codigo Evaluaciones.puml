@@ -1,0 +1,39 @@
+@startuml
+title "Diagrama C4 - Nivel 4: Código (Servicio de Evaluaciones)"
+
+class EvaluacionController {
+    +crearEvaluacion(evaluacionDTO: EvaluacionDTO): ResponseEntity<EvaluacionDTO>
+    +obtenerEvaluaciones(): List<EvaluacionDTO>
+    +obtenerEvaluacionPorId(id: Long): EvaluacionDTO
+}
+
+class EvaluacionService {
+    +crearEvaluacion(evaluacionDTO: EvaluacionDTO): EvaluacionDTO
+    +obtenerEvaluaciones(): List<EvaluacionDTO>
+    +obtenerEvaluacionPorId(id: Long): EvaluacionDTO
+}
+
+class EvaluacionRepository {
+    +save(evaluacion: EvaluacionEntity): EvaluacionEntity
+    +findById(id: Long): Optional<EvaluacionEntity>
+    +findAll(): List<EvaluacionEntity>
+}
+
+class EvaluacionEntity {
+    Long id
+    Long candidatoId
+    String resultado
+    String comentarios
+    Date fechaEvaluacion
+}
+
+class KafkaConsumer {
+    +procesarEventoCandidatoPostulado(candidatoDTO: CandidatoDTO): void
+}
+
+EvaluacionController --> EvaluacionService
+EvaluacionService --> EvaluacionRepository
+EvaluacionRepository --> EvaluacionEntity
+KafkaConsumer --> EvaluacionService
+
+@enduml

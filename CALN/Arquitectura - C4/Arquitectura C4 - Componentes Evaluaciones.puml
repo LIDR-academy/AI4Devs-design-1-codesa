@@ -1,0 +1,23 @@
+@startuml
+title "Diagrama C4 - Nivel 3: Componentes (Servicio de Evaluaciones)"
+
+package "Servicio de Evaluaciones (Spring Boot)" {
+  
+  rectangle "EvaluacionController" as Controller
+  rectangle "EvaluacionService" as Service
+  rectangle "EvaluacionRepository" as Repository
+  rectangle "KafkaConsumer" as KafkaConsumer
+  rectangle "EvaluacionEntity" as Entity
+  
+  database "DB Evaluaciones (Oracle)" as DB_Evaluaciones
+  
+  Controller --> Service : "Llama a"
+  Service --> Repository : "Accede a"
+  Repository --> DB_Evaluaciones : "Guarda/Consulta"
+
+  KafkaConsumer --> Service : "Recibe eventos de postulaciones"
+  
+  Entity -[hidden]-> Repository
+}
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+title "Diagrama C4 - Nivel 1: Contexto"
+
+actor "Reclutador" as Reclutador
+actor "Candidato" as Candidato
+actor "Administrador" as Administrador
+
+package "Sistema de Gestión de Candidatos (ATS)" {
+  rectangle "Portal de Reclutadores" as PortalReclutador
+  rectangle "Portal de Candidatos" as PortalCandidato
+  rectangle "API Gateway" as APIGateway
+}
+
+Reclutador --> PortalReclutador : "Gestiona Ofertas"
+Candidato --> PortalCandidato : "Aplica a Ofertas"
+Administrador --> PortalReclutador : "Administra el Sistema"
+
+PortalReclutador --> APIGateway
+PortalCandidato --> APIGateway
+APIGateway --> "Microservicios (Ofertas, Candidatos, Evaluaciones)"
+
+@enduml

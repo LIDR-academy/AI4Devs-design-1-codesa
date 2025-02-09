@@ -1,0 +1,45 @@
+@startuml
+skinparam linetype ortho
+
+package "Microfrontend - UI" {
+  rectangle "UI - Ofertas" as UI_Ofertas
+  rectangle "UI - Candidatos" as UI_Candidatos
+  rectangle "UI - Evaluaciones" as UI_Evaluaciones
+}
+
+package "API Gateway" {
+  rectangle "API Gateway" as API
+}
+
+package "Microservicios" {
+  rectangle "Servicio de Ofertas" as MS_Ofertas
+  rectangle "Servicio de Candidatos" as MS_Candidatos
+  rectangle "Servicio de Evaluaciones" as MS_Evaluaciones
+}
+
+package "Base de Datos" {
+  database "DB Ofertas" as DB_Ofertas
+  database "DB Candidatos" as DB_Candidatos
+  database "DB Evaluaciones" as DB_Evaluaciones
+}
+
+package "Event Bus" {
+  queue "Mensajería/Eventos" as Bus
+}
+
+UI_Ofertas --> API
+UI_Candidatos --> API
+UI_Evaluaciones --> API
+
+API --> MS_Ofertas
+API --> MS_Candidatos
+API --> MS_Evaluaciones
+
+MS_Ofertas --> DB_Ofertas
+MS_Candidatos --> DB_Candidatos
+MS_Evaluaciones --> DB_Evaluaciones
+
+MS_Ofertas <--> Bus
+MS_Candidatos <--> Bus
+MS_Evaluaciones <--> Bus
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+title "Diagrama C4 - Nivel 3: Componentes (Servicio de Candidatos)"
+
+package "Servicio de Candidatos (Spring Boot)" {
+  
+  rectangle "CandidatoController" as Controller
+  rectangle "CandidatoService" as Service
+  rectangle "CandidatoRepository" as Repository
+  rectangle "KafkaConsumer" as KafkaConsumer
+  rectangle "KafkaProducer" as KafkaProducer
+  rectangle "CandidatoEntity" as Entity
+  
+  database "DB Candidatos (Oracle)" as DB_Candidatos
+  
+  Controller --> Service : "Llama a"
+  Service --> Repository : "Accede a"
+  Repository --> DB_Candidatos : "Guarda/Consulta"
+  
+  Service --> KafkaProducer : "Envía evento CandidatoPostulado"
+  KafkaProducer --> "Bus de Eventos (Kafka)"
+  
+  KafkaConsumer --> Service : "Recibe eventos de ofertas"
+  
+  Entity -[hidden]-> Repository
+}
+
+@enduml

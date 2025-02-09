@@ -1,0 +1,64 @@
+@startuml
+entity Candidato {
+  + ID_Candidato : UUID [PK]
+  + Nombre : String
+  + Apellido : String
+  + Email : String [UNIQUE]
+  + Telefono : String
+  + CV_URL : String
+  + Fecha_Registro : DateTime
+}
+
+entity Oferta {
+  + ID_Oferta : UUID [PK]
+  + Titulo : String
+  + Descripcion : Text
+  + Requisitos : Text
+  + Ubicacion : String
+  + Fecha_Publicacion : DateTime
+  + Estado : Enum ("Abierta", "Cerrada")
+}
+
+entity Aplicacion {
+  + ID_Aplicacion : UUID [PK]
+  + ID_Candidato : UUID [FK]
+  + ID_Oferta : UUID [FK]
+  + Fecha_Aplicacion : DateTime
+  + Estado : Enum ("Pendiente", "En proceso", "Rechazado", "Aceptado")
+}
+
+entity Entrevista {
+  + ID_Entrevista : UUID [PK]
+  + ID_Candidato : UUID [FK]
+  + ID_Oferta : UUID [FK]
+  + Fecha_Hora : DateTime
+  + Medio : Enum ("Presencial", "Virtual")
+  + Comentarios : Text
+}
+
+entity Evaluacion {
+  + ID_Evaluacion : UUID [PK]
+  + ID_Candidato : UUID [FK]
+  + ID_Oferta : UUID [FK]
+  + Puntuacion : Integer (0-10)
+  + Comentario : Text
+  + Fecha_Evaluacion : DateTime
+}
+
+entity Notificacion {
+  + ID_Notificacion : UUID [PK]
+  + ID_Candidato : UUID [FK]
+  + Tipo : Enum ("Entrevista Programada", "Cambio de Estado", "Oferta Cerrada")
+  + Mensaje : Text
+  + Fecha_Envio : DateTime
+}
+
+Candidato ||--o{ Aplicacion : Aplica
+Oferta ||--o{ Aplicacion : Tiene
+Aplicacion ||--o{ Entrevista : Genera
+Entrevista ||--o{ Evaluacion : Se basa en
+Candidato ||--o{ Notificacion : Recibe
+Evaluacion ||--o{ Notificacion : Genera
+@enduml
+
+

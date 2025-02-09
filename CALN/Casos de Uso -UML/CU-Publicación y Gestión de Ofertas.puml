@@ -1,0 +1,15 @@
+@startuml
+actor Reclutador
+
+rectangle "Publicación y Gestión de Ofertas" {
+    usecase "Crear Nueva Oferta" as U1
+    usecase "Editar Oferta" as U2
+    usecase "Publicar Oferta" as U3
+    usecase "Cerrar Oferta" as U4
+}
+
+Reclutador --> U1
+Reclutador --> U2
+Reclutador --> U3
+Reclutador --> U4
+@enduml
