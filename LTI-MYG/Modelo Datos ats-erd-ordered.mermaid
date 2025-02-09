@@ -1,0 +1,111 @@
+erDiagram
+    %% Entidades Base (Izquierda)
+    Department ||--o{ Vacancy : owns
+    User ||--o{ Vacancy : "creates/manages"
+    User ||--o{ Application_Review : "performs"
+    User ||--o{ Interview : "conducts"
+    Pipeline_Stage ||--o{ Application : contains
+
+    %% Entidades de Proceso (Centro)
+    Vacancy ||--o{ Application : receives
+    Candidate ||--o{ Application : submits
+
+    %% Entidades de Seguimiento (Derecha)
+    Application ||--o{ Application_Review : has
+    Application ||--o{ Interview : generates
+    Vacancy ||--o{ Interview : requires
+    Candidate ||--o{ Interview : attends
+
+    Department {
+        uuid id PK
+        string name
+        string code
+        uuid manager_id FK
+        boolean is_active
+        datetime created_at
+    }
+
+    User {
+        uuid id PK
+        string email
+        string password_hash
+        string first_name
+        string last_name
+        string role
+        datetime created_at
+        boolean is_active
+    }
+
+    Pipeline_Stage {
+        uuid id PK
+        string name
+        integer order
+        string requirements
+        boolean is_active
+        datetime created_at
+    }
+
+    Vacancy {
+        uuid id PK
+        string title
+        text description
+        string status
+        uuid department_id FK
+        uuid created_by FK
+        jsonb requirements
+        decimal salary_min
+        decimal salary_max
+        string location
+        datetime publication_date
+        datetime closing_date
+        datetime created_at
+        datetime updated_at
+    }
+
+    Candidate {
+        uuid id PK
+        string email
+        string first_name
+        string last_name
+        string phone
+        string resume_url
+        jsonb skills
+        text notes
+        datetime created_at
+        datetime updated_at
+    }
+
+    Application {
+        uuid id PK
+        uuid candidate_id FK
+        uuid vacancy_id FK
+        uuid current_stage_id FK
+        string status
+        text cover_letter
+        jsonb additional_info
+        datetime applied_at
+        datetime updated_at
+    }
+
+    Application_Review {
+        uuid id PK
+        uuid application_id FK
+        uuid reviewer_id FK
+        text comments
+        integer rating
+        string status
+        datetime reviewed_at
+    }
+
+    Interview {
+        uuid id PK
+        uuid application_id FK
+        uuid interviewer_id FK
+        datetime schedule_time
+        string status
+        string meeting_link
+        text feedback
+        integer rating
+        datetime created_at
+        datetime updated_at
+    }

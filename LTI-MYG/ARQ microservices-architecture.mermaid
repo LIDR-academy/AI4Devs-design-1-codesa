@@ -1,0 +1,69 @@
+graph TB
+    %% Frontend y Gateway
+    UI[Portal Web SPA]
+    API[API Gateway]
+    
+    %% Servicios de Autenticación
+    AUTH[Auth Service]
+    DB_AUTH[(Auth DB)]
+    
+    %% Servicios Core
+    VAC[Vacancy Service]
+    DB_VAC[(Vacancy DB)]
+    
+    CAND[Candidate Service]
+    DB_CAND[(Candidate DB)]
+    
+    APP[Application Service]
+    DB_APP[(Application DB)]
+    
+    %% Servicios de Soporte
+    NOTIF[Notification Service]
+    DB_NOTIF[(Notification DB)]
+    
+    DOCS[Document Service]
+    S3[Object Storage]
+    
+    %% Servicios de Análisis
+    ANALYTICS[Analytics Service]
+    DB_ANALYTICS[(Analytics DB)]
+    
+    %% Message Broker
+    QUEUE{Message Broker}
+    
+    %% Conexiones Frontend
+    UI --> API
+    API --> AUTH
+    API --> VAC
+    API --> CAND
+    API --> APP
+    
+    %% Conexiones DB
+    AUTH --- DB_AUTH
+    VAC --- DB_VAC
+    CAND --- DB_CAND
+    APP --- DB_APP
+    NOTIF --- DB_NOTIF
+    ANALYTICS --- DB_ANALYTICS
+    
+    %% Conexiones entre servicios
+    VAC --> QUEUE
+    CAND --> QUEUE
+    APP --> QUEUE
+    QUEUE --> NOTIF
+    QUEUE --> ANALYTICS
+    
+    %% Conexiones Documentos
+    DOCS --- S3
+    CAND --> DOCS
+    
+    %% Estilos
+    classDef service fill:#68B3C8,stroke:#333,stroke-width:2px;
+    classDef database fill:#FFA726,stroke:#333,stroke-width:2px;
+    classDef frontend fill:#81C784,stroke:#333,stroke-width:2px;
+    classDef queue fill:#BA68C8,stroke:#333,stroke-width:2px;
+    
+    class UI,API frontend;
+    class AUTH,VAC,CAND,APP,NOTIF,DOCS,ANALYTICS service;
+    class DB_AUTH,DB_VAC,DB_CAND,DB_APP,DB_NOTIF,DB_ANALYTICS,S3 database;
+    class QUEUE queue;

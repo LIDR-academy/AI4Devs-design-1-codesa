@@ -1,0 +1,47 @@
+C4Context
+    title Diagrama C4 - Application Service
+
+    Enterprise_Boundary(b0, "ATS System") {
+        Person(candidate, "Candidato", "Usuario que aplica a vacantes")
+        Person(recruiter, "Reclutador", "Usuario que gestiona aplicaciones")
+        
+        System_Boundary(b1, "Application Service") {
+            Container(api, "API Application", "API REST", "Gestiona las operaciones de aplicaciones")
+            Container(worker, "Application Worker", "Background Jobs", "Procesa tareas asíncronas")
+            ContainerDb(db, "Application Database", "PostgreSQL", "Almacena datos de aplicaciones")
+            Container(cache, "Cache", "Redis", "Caché de datos frecuentes")
+        }
+
+        System_Ext(vacancy, "Vacancy Service", "Gestión de vacantes")
+        System_Ext(candidate_svc, "Candidate Service", "Gestión de candidatos")
+        System_Ext(notification, "Notification Service", "Envío de notificaciones")
+        System_Ext(analytics, "Analytics Service", "Análisis de datos")
+        
+        Container_Boundary(c1, "API Components") {
+            Component(app_handler, "Application Handler", "Gestiona el ciclo de vida de aplicaciones")
+            Component(stage_handler, "Stage Handler", "Gestiona las etapas del proceso")
+            Component(review_handler, "Review Handler", "Gestiona las revisiones")
+            Component(validation, "Validation Layer", "Valida datos de entrada")
+            Component(event_publisher, "Event Publisher", "Publica eventos del dominio")
+        }
+
+        Rel(candidate, api, "Aplica a vacantes", "HTTPS/REST")
+        Rel(recruiter, api, "Gestiona aplicaciones", "HTTPS/REST")
+        
+        Rel(api, vacancy, "Consulta vacantes", "HTTPS/REST")
+        Rel(api, candidate_svc, "Consulta candidatos", "HTTPS/REST")
+        Rel(api, notification, "Solicita notificaciones", "AMQP")
+        Rel(worker, analytics, "Envía métricas", "AMQP")
+        
+        Rel(api, db, "CRUD Operaciones", "SQL")
+        Rel(api, cache, "Lee/Escribe", "Redis Protocol")
+        Rel(worker, db, "Lee datos", "SQL")
+        
+        Rel(app_handler, validation, "Usa")
+        Rel(app_handler, event_publisher, "Publica eventos")
+        Rel(stage_handler, validation, "Usa")
+        Rel(review_handler, validation, "Usa")
+    }
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+

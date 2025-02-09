@@ -1,0 +1,28 @@
+sequenceDiagram
+    actor R as Reclutador
+    actor HM as Hiring Manager
+    participant S as Sistema ATS
+    participant N as Sistema Notificaciones
+
+    R->>S: Crear nueva vacante
+    S->>S: Validar datos requeridos
+    S->>HM: Solicitar aprobación
+    HM->>S: Aprobar vacante
+    S->>S: Cambiar estado a "Aprobada"
+    S->>N: Notificar aprobación
+    N->>R: Enviar notificación
+    S->>S: Publicar vacante
+    
+    alt Modificación de vacante
+        R->>S: Modificar datos
+        S->>S: Validar cambios
+        S->>N: Notificar cambios
+        N->>HM: Enviar notificación
+    end
+    
+    alt Cierre de vacante
+        R->>S: Cerrar vacante
+        S->>S: Actualizar estado
+        S->>N: Notificar cierre
+        N->>HM: Enviar notificación
+    end
