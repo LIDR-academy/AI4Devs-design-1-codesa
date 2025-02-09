@@ -1,0 +1,41 @@
+flowchart TD
+    subgraph AWS_Cloud [AWS Cloud]
+        APIGW["API Gateway (AWS API Gateway)"]
+        Cognito["AWS Cognito"]
+        SQS["Amazon SQS"]
+        SES["Amazon SES"]
+
+        subgraph Microservicios [Microservicios - Spring Boot]
+            Usuarios["Servicio de Gestión de Usuarios"]
+            Candidatos["Servicio de Gestión de Candidatos"]
+            Vacantes["Servicio de Gestión de Vacantes"]
+            Postulaciones["Servicio de Gestión de Postulaciones"]
+            Correos["Servicio de Correos"]
+        end
+
+        subgraph Bases_de_Datos [Bases de Datos - Oracle]
+            RDS_Users["Oracle - Usuarios"]
+            RDS_Candidatos["Oracle - Candidatos"]
+            RDS_Vacantes["Oracle - Vacantes"]
+            RDS_Postulaciones["Oracle - Postulaciones"]
+        end
+        
+        subgraph Frontend [Frontend]
+            UI["Angular (AWS Amplify)"]
+        end
+    end
+
+    UI -->|HTTPS| APIGW
+    APIGW -->|Autenticación| Cognito
+    APIGW -->|Usuarios| Usuarios
+    APIGW -->|Candidatos| Candidatos
+    APIGW -->|Vacantes| Vacantes
+    APIGW -->|Postulaciones| Postulaciones
+    Postulaciones -.->|Envía evento| SQS
+    SQS --> Correos
+    Correos -->|Notificaciones| SES
+
+    Usuarios -->|Almacena datos| RDS_Users
+    Candidatos -->|Almacena datos| RDS_Candidatos
+    Vacantes -->|Almacena datos| RDS_Vacantes
+    Postulaciones -->|Almacena datos| RDS_Postulaciones

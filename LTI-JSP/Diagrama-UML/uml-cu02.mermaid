@@ -1,0 +1,10 @@
+graph TD
+    actor -->Candidato
+    Candidato -->|Accede a vacante| VerVacante
+    VerVacante -->|Muestra formulario| Formulario
+    Candidato -->|Completa datos y adjunta CV| EnviarDatos
+    EnviarDatos -->|Valida archivo| ValidaciónCV
+    ValidaciónCV -->|Confirma postulación| Confirmación
+    Confirmación -->|Notifica reclutador| Notificación
+    Candidato -->|Guarda postulación parcial| GuardadoParcial
+    Candidato -->|Aplica a múltiples vacantes| MultiplesPostulaciones

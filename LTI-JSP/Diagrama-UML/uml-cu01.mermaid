@@ -1,0 +1,10 @@
+graph TD
+    actor -->Reclutador
+    Reclutador -->|Inicia sesión| Autenticación
+    Autenticación -->|Verifica credenciales| Sistema
+    Reclutador -->|Crea vacante| CrearVacante
+    CrearVacante -->|Solicita datos| DatosVacante
+    DatosVacante -->|Valida información| Validación
+    Validación -->|Publica vacante| Publicación
+    Publicación -->|Genera URL| URLVacante
+    Reclutador -->|Edita/Duplica/Desactiva| ModificaciónVacante

@@ -1,0 +1,13 @@
+graph TD
+    A([Reclutador]) --> B{Gestión de Vacantes}
+    B --> C[Crear Vacante]
+    B --> D[Editar Vacante]
+    B --> E[Desactivar Vacante]
+    B --> F[Duplicar Vacante]
+    C --> G[Completar Información]
+    G --> H[Validar Datos]
+    H --> I[Publicar Vacante]
+    I --> J[Generar URL]
+    D --> H
+    style A fill:#f9f,stroke:#333
+    style B fill:#bbf,stroke:#333

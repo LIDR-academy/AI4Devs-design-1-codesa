@@ -1,0 +1,12 @@
+graph TD
+    actor -->Reclutador
+    Reclutador -->|Inicia sesión| Autenticación
+    Autenticación -->|Verifica credenciales| Sistema
+    Reclutador -->|Accede al pipeline| Pipeline
+    Pipeline -->|Muestra candidatos| EstadosCandidatos
+    EstadosCandidatos -->|Mueve candidatos entre etapas| MoverCandidato
+    MoverCandidato -->|Registra cambios| RegistroCambio
+    RegistroCambio -->|Notifica actualización| Notificación
+    Reclutador -->|Filtra candidatos| FiltroCandidatos
+    Reclutador -->|Agrega notas| Notas
+    Reclutador -->|Descarta candidatos| Descarte

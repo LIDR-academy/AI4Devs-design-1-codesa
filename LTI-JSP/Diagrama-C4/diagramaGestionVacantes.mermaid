@@ -1,0 +1,49 @@
+graph TD
+  %% Contexto
+  subgraph "AWS Cloud"
+    API_GW[🛡 API Gateway] 
+    Cognito[🔑 AWS Cognito]
+
+    %% Contenedores: Microservicios
+    subgraph "Microservicios (Spring Boot)"
+      MS_Usuarios[🟦 Gestión de Usuarios]
+      MS_Candidatos[🟦 Gestión de Candidatos]
+      MS_Vacantes[🟦 Gestión de Vacantes]
+      MS_Postulaciones[🟦 Gestión de Postulaciones]
+      MS_Correos[📧 Servicio de Correos]
+    end
+
+    %% Bases de Datos
+    subgraph "Bases de Datos (Oracle - Amazon RDS)"
+      DB_Usuarios[(🗄 Oracle - Usuarios)]
+      DB_Candidatos[(🗄 Oracle - Candidatos)]
+      DB_Vacantes[(🗄 Oracle - Vacantes)]
+      DB_Postulaciones[(🗄 Oracle - Postulaciones)]
+    end
+  end
+
+  %% Conexiones
+  WebApp -->|HTTPS| API_GW
+  API_GW -->|🔑 Autenticación| Cognito
+  API_GW -->|🔁 Llamadas API| MS_Usuarios
+  API_GW -->|🔁 Llamadas API| MS_Candidatos
+  API_GW -->|🔁 Llamadas API| MS_Vacantes
+  API_GW -->|🔁 Llamadas API| MS_Postulaciones
+
+  MS_Postulaciones -.->|📩 Notificación| MS_Correos
+
+  MS_Usuarios -->|📂 Datos| DB_Usuarios
+  MS_Candidatos -->|📂 Datos| DB_Candidatos
+  MS_Vacantes -->|📂 Datos| DB_Vacantes
+  MS_Postulaciones -->|📂 Datos| DB_Postulaciones
+
+  %% Componente: Servicio de Vacantes
+  subgraph "MS_Vacantes Interno"
+    Controller[🌍 VacantesController] --> Service[⚙ VacantesService]
+    Service --> Repository[🗄 VacantesRepository]
+    Repository -->|Consulta SQL| DB_Vacantes
+
+    Controller -->|🔑 Validación| Security[🔐 JWT Auth]
+    Controller -->|🔁 Llamadas API| MS_Usuarios
+    Controller -->|🔁 Llamadas API| MS_Postulaciones
+  end
