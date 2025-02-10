@@ -1,0 +1,31 @@
+---
+title: Diagrama C4 - Servicio de Entrevistas
+---
+
+%% Contexto (Nivel 1)
+graph TD;
+    Usuario_Reclutador["👨‍💼 Reclutador"] -->|Accede a| ATS["🖥️ Sistema ATS"]
+    Usuario_Candidato["👩‍💻 Candidato"] -->|Accede a| ATS
+    ATS -->|Usa| MS_Entrevistas["🟣 Servicio de Entrevistas"]
+    MS_Entrevistas -->|Envía notificaciones| MS_Notificaciones["🔔 Servicio de Notificaciones"]
+    MS_Entrevistas -->|Sincroniza| API_Calendario["📆 API Calendario Externo"]
+
+%% Contenedores (Nivel 2)
+subgraph Servicio_Entrevistas ["🏗️ Microservicio de Entrevistas"]
+    API_Entrevistas["🛠️ API REST de Entrevistas"]
+    BD_Entrevistas["🗃️ BD de Entrevistas"]
+    Cola_Mensajeria["📩 Cola de Mensajería (Kafka/RabbitMQ)"]
+    Modulo_Notificaciones["🔔 Módulo de Notificaciones"]
+    Modulo_Calendario["📆 Módulo de Integración Calendario"]
+end
+
+%% Conexiones internas
+API_Entrevistas --> BD_Entrevistas
+API_Entrevistas --> Modulo_Notificaciones
+API_Entrevistas --> Modulo_Calendario
+Modulo_Notificaciones --> Cola_Mensajeria
+Modulo_Calendario --> API_Calendario
+
+%% Conexiones externas
+MS_Entrevistas -->|Consume API| API_Entrevistas
+Cola_Mensajeria --> MS_Notificaciones

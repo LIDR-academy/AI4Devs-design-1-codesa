@@ -1,0 +1,87 @@
+erDiagram
+    CANDIDATO {
+        int id_candidato PK
+        string nombre
+        string email
+        string telefono
+        string cv_url
+        string estado
+    }
+
+    VACANTE {
+        int id_vacante PK
+        int id_empresa FK
+        int id_reclutador FK
+        string titulo
+        string descripcion
+        string ubicacion
+        string tipo_contrato
+        string estado
+    }
+
+    POSTULACION {
+        int id_postulacion PK
+        int id_candidato FK
+        int id_vacante FK
+        date fecha_postulacion
+        string estado
+    }
+
+    EMPRESA {
+        int id_empresa PK
+        string nombre
+        string industria
+        string ubicacion
+        string sitio_web
+        string tamanio
+    }
+
+    RECLUTADOR {
+        int id_reclutador PK
+        int id_empresa FK
+        string nombre
+        string email
+        string telefono
+    }
+
+    ENTREVISTA {
+        int id_entrevista PK
+        int id_candidato FK
+        int id_reclutador FK
+        int id_vacante FK
+        datetime fecha_hora
+        string metodo
+        string resultado
+    }
+
+    EVALUACION {
+        int id_evaluacion PK
+        int id_candidato FK
+        int id_vacante FK
+        string tipo
+        float puntaje
+    }
+
+    NOTIFICACION {
+        int id_notificacion PK
+        int id_usuario FK
+        string mensaje
+        datetime fecha_envio
+        string estado
+    }
+
+    CANDIDATO ||--o{ POSTULACION : aplica
+    VACANTE ||--o{ POSTULACION : recibe
+
+    EMPRESA ||--o{ VACANTE : publica
+    RECLUTADOR ||--o{ VACANTE : gestiona
+
+    CANDIDATO ||--o{ ENTREVISTA : asiste
+    RECLUTADOR ||--o{ ENTREVISTA : coordina
+    VACANTE ||--o{ ENTREVISTA : evalua
+
+    CANDIDATO ||--o{ EVALUACION : realiza
+    VACANTE ||--o{ EVALUACION : requiere
+
+    CANDIDATO ||--o{ NOTIFICACION : recibe
+    RECLUTADOR ||--o{ NOTIFICACION : recibe

@@ -1,0 +1,53 @@
+graph TD;
+    
+    %% Frontend y API Gateway
+    subgraph Frontend [Micro Frontend UI]
+        UI_Candidatos["Módulo Candidatos"]
+        UI_Vacantes["Módulo Vacantes"]
+        UI_Reclutadores["Módulo Reclutadores"]
+        UI_Entrevistas["Módulo Entrevistas"]
+        UI_Evaluaciones["Módulo Evaluaciones"]
+        UI_Notificaciones["Módulo Notificaciones"]
+    end
+
+    UI_Candidatos --> API_Gateway
+    UI_Vacantes --> API_Gateway
+    UI_Reclutadores --> API_Gateway
+    UI_Entrevistas --> API_Gateway
+    UI_Evaluaciones --> API_Gateway
+    UI_Notificaciones --> API_Gateway
+    
+    API_Gateway -- Comunicación REST --> MS_Candidatos
+    API_Gateway -- Comunicación REST --> MS_Vacantes
+    API_Gateway -- Comunicación REST --> MS_Postulaciones
+    API_Gateway -- Comunicación REST --> MS_Reclutadores
+    API_Gateway -- Comunicación REST --> MS_Entrevistas
+    API_Gateway -- Comunicación REST --> MS_Evaluaciones
+    API_Gateway -- Comunicación REST --> MS_Notificaciones
+
+    subgraph Backend [Backend - Microservicios]
+        MS_Candidatos["Servicio de Candidatos"]
+        MS_Vacantes["Servicio de Vacantes"]
+        MS_Postulaciones["Servicio de Postulaciones"]
+        MS_Reclutadores["Servicio de Reclutadores"]
+        MS_Entrevistas["Servicio de Entrevistas"]
+        MS_Evaluaciones["Servicio de Evaluaciones"]
+        MS_Notificaciones["Servicio de Notificaciones"]
+    end
+
+    MS_Candidatos --> DB_Candidatos["BD Candidatos"]
+    MS_Vacantes --> DB_Vacantes["BD Vacantes"]
+    MS_Postulaciones --> DB_Postulaciones["BD Postulaciones"]
+    MS_Reclutadores --> DB_Reclutadores["BD Reclutadores"]
+    MS_Entrevistas --> DB_Entrevistas["BD Entrevistas"]
+    MS_Evaluaciones --> DB_Evaluaciones["BD Evaluaciones"]
+    MS_Notificaciones --> DB_Notificaciones["BD Notificaciones"]
+
+    subgraph Mensajería [Mensajería Asíncrona]
+        Cola_Eventos["Kafka / RabbitMQ"]
+    end
+
+    MS_Postulaciones -- Eventos --> Cola_Eventos
+    MS_Notificaciones -- Eventos --> Cola_Eventos
+    MS_Entrevistas -- Eventos --> Cola_Eventos
+    MS_Evaluaciones -- Eventos --> Cola_Eventos
