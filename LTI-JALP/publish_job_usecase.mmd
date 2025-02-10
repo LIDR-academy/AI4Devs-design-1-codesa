@@ -1,0 +1,12 @@
+graph TD
+    subgraph "Caso de Uso: Publicación y Gestión de Vacantes"
+    A[Reclutador] -->|Crear vacante| B[Sistema LTI]
+    B -->|Validar datos| C{Validación}
+    C -->|Éxito| D[Distribuir a canales]
+    D -->|Publicar en| E[Portales de empleo]
+    D -->|Publicar en| F[Redes sociales]
+    D -->|Publicar en| G[Sitio web empresa]
+    C -->|Error| H[Notificar errores]
+    H -->|Mostrar| A
+    E & F & G -->|Tracking| I[Dashboard analytics]
+    end 

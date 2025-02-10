@@ -1,0 +1,12 @@
+graph TD
+    subgraph "Caso de Uso: Screening y Evaluación de Candidatos"
+    A[Candidato] -->|Aplica| B[Portal de empleo]
+    B -->|Datos| C[Sistema LTI]
+    C -->|IA Screening| D{Evaluación inicial}
+    D -->|Califica| E[Score candidato]
+    E -->|Notifica| F[Reclutador]
+    F -->|Revisa| G{Decisión}
+    G -->|Aceptar| H[Agendar entrevista]
+    G -->|Rechazar| I[Enviar notificación]
+    H & I -->|Actualizar| J[Estado candidato]
+    end 

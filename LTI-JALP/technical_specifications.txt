@@ -1,0 +1,31 @@
+Especificaciones Técnicas:
+
+1. Tecnologías Principales
+   - Backend: Node.js/TypeScript
+   - Framework: NestJS
+   - ORM: TypeORM
+   - Message Broker: RabbitMQ
+   - Cache: Redis
+   - DB: PostgreSQL
+
+2. Patrones de Diseño
+   - CQRS para operaciones
+   - Event Sourcing
+   - Repository Pattern
+   - Factory Pattern
+   - Strategy Pattern
+   - Observer Pattern
+
+3. Principios Arquitectónicos
+   - Clean Architecture
+   - Domain-Driven Design
+   - SOLID Principles
+   - Twelve-Factor App
+   - Event-Driven Architecture
+
+4. Consideraciones Técnicas
+   - Alta disponibilidad
+   - Escalabilidad horizontal
+   - Tolerancia a fallos
+   - Monitoreo y logging
+   - Testing automatizado 

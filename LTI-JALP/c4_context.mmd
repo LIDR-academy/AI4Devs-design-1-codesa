@@ -1,0 +1,11 @@
+graph TB
+    subgraph "Nivel 1: Diagrama de Contexto"
+        R[Reclutador]
+        C[Candidato]
+        AS[Application Service]
+        ES[Sistemas Externos]
+
+        R -->|Gestiona aplicaciones| AS
+        C -->|Aplica a vacantes| AS
+        AS -->|Integra con| ES
+    end 

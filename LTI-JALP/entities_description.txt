@@ -1,0 +1,34 @@
+1. Company (Empresa)
+   - Almacena información de las empresas clientes
+   - Gestiona configuraciones específicas por empresa
+   - Relación principal con Jobs y Users
+
+2. Job (Vacante)
+   - Contiene detalles de las posiciones abiertas
+   - Vinculada a una empresa específica
+   - Base para el proceso de reclutamiento
+
+3. Candidate (Candidato)
+   - Información personal y profesional de candidatos
+   - Almacena historial y documentos
+   - Perfil enriquecido con skills y experiencia
+
+4. Application (Postulación)
+   - Conecta Candidates con Jobs
+   - Tracking del proceso de selección
+   - Almacena resultados de screening y evaluaciones
+
+5. Interview (Entrevista)
+   - Gestión de entrevistas programadas
+   - Registro de feedback y evaluaciones
+   - Vincula candidatos con entrevistadores
+
+6. User (Usuario)
+   - Usuarios del sistema (reclutadores, evaluadores)
+   - Gestión de roles y permisos
+   - Asociación con empresa específica
+
+7. Evaluation (Evaluación)
+   - Registro estructurado de evaluaciones
+   - Criterios específicos y puntuaciones
+   - Vinculada a aplicaciones y evaluadores 
