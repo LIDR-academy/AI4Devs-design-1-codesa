@@ -1,0 +1,43 @@
+graph TB
+    subgraph Frontend["Frontend Layer"]
+        Web["Web Application\n(React + TypeScript)"]
+        Mobile["Mobile App\n(React Native)"]
+    end
+
+    subgraph API["API Layer"]
+        Gateway["API Gateway\n(Node.js)"]
+        Auth["Auth Service\n(OAuth/JWT)"]
+    end
+
+    subgraph Core["Core Services"]
+        Jobs["Job Management\nService"]
+        Candidates["Candidate\nService"]
+        Interview["Interview\nService"]
+        Workflow["Workflow\nService"]
+    end
+
+    subgraph AI["AI Layer"]
+        Engine["AI Engine\n(Python/TensorFlow)"]
+        ML["ML Models"]
+        NLP["NLP Service"]
+    end
+
+    subgraph Data["Data Layer"]
+        DB[(PostgreSQL)]
+        Cache[(Redis)]
+        Search[(Elasticsearch)]
+        Files[("File Storage\n(S3)")]
+    end
+
+    subgraph Integration["Integration Layer"]
+        Queue{"Message Queue\n(RabbitMQ)"}
+        External["External APIs\nConnector"]
+    end
+
+    Frontend --> API
+    API --> Core
+    Core --> AI
+    Core --> Data
+    Core --> Integration
+    AI --> Data
+    Integration --> External

@@ -1,0 +1,73 @@
+erDiagram
+    Job ||--o{ Application : receives
+    Job {
+        uuid id
+        string title
+        string description
+        string requirements
+        string department
+        string location
+        enum status
+        date posted_date
+        date closing_date
+        uuid hiring_manager_id
+    }
+    
+    Candidate ||--o{ Application : submits
+    Candidate {
+        uuid id
+        string first_name
+        string last_name
+        string email
+        string phone
+        string resume_url
+        json skills
+        json experience
+        date created_at
+    }
+    
+    Application ||--o{ Interview : generates
+    Application {
+        uuid id
+        uuid job_id
+        uuid candidate_id
+        enum status
+        float ai_score
+        json evaluation_data
+        date applied_date
+        date last_updated
+    }
+    
+    Interview }|--|| User : conducted_by
+    Interview {
+        uuid id
+        uuid application_id
+        uuid interviewer_id
+        datetime schedule
+        enum type
+        enum status
+        text feedback
+        integer rating
+        json evaluation_form
+    }
+    
+    User ||--o{ Job : manages
+    User {
+        uuid id
+        string first_name
+        string last_name
+        string email
+        enum role
+        string department
+        date joined_date
+    }
+    
+    Workflow ||--|| Job : governs
+    Workflow {
+        uuid id
+        string name
+        json stages
+        json automation_rules
+        boolean is_active
+        uuid created_by
+    }

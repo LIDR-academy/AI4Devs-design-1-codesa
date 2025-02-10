@@ -1,0 +1,22 @@
+C4Context
+    title C4 Component Diagram - AI Layer
+
+    Container_Boundary(ai, "AI Layer") {
+        Component(engine, "AI Engine", "Python/FastAPI", "Coordina operaciones de IA")
+        Component(matcher, "Candidate Matcher", "Python/scikit-learn", "Match candidato-puesto")
+        Component(analyzer, "CV Analyzer", "Python/spaCy", "Extracción de información")
+        Component(rank, "Ranking Engine", "Python", "Sistema de puntuación")
+        Component(pred, "Predictive Analytics", "Python/TensorFlow", "Análisis predictivo")
+        Component(queue, "Task Queue", "Redis", "Cola de procesamiento")
+    }
+
+    Container(core, "Core Services", "Node.js", "Servicios principales")
+    Container(db, "Data Layer", "PostgreSQL", "Almacenamiento")
+
+    Rel(core, engine, "Envía solicitudes", "REST API")
+    Rel(engine, matcher, "Coordina matching")
+    Rel(engine, analyzer, "Procesa documentos")
+    Rel(engine, rank, "Solicita rankings")
+    Rel(engine, pred, "Solicita predicciones")
+    Rel(engine, queue, "Gestiona tareas")
+    Rel(engine, db, "Lee/Escribe datos", "SQL")
