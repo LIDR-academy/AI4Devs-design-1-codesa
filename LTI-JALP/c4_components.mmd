@@ -1,0 +1,30 @@
+graph TB
+    subgraph "Nivel 3: Diagrama de Componentes - Application Core"
+        AC[Application Controller]
+        PS[Pipeline Service]
+        SS[Scoring Service]
+        WF[Workflow Engine]
+        NM[Notification Manager]
+        RM[Report Manager]
+        
+        subgraph "Domain Layer"
+            DM[Domain Models]
+            VS[Validation Service]
+        end
+        
+        subgraph "Data Layer"
+            REPO[Repositories]
+            CACHE[Cache Manager]
+        end
+        
+        AC -->|Coordina| PS
+        PS -->|Evalúa| SS
+        PS -->|Gestiona| WF
+        WF -->|Notifica| NM
+        WF -->|Genera| RM
+        
+        PS & SS & WF -->|Usa| DM
+        DM -->|Valida| VS
+        DM -->|Persiste| REPO
+        REPO -->|Cachea| CACHE
+    end 

@@ -1,0 +1,20 @@
+graph TB
+    subgraph "Nivel 2: Diagrama de Contenedores - Application Service"
+        API[API REST]
+        WS[WebSocket Server]
+        APP[Application Core]
+        MQ[Message Queue]
+        DB[(Application DB)]
+        CACHE[(Redis Cache)]
+
+        API -->|Procesa requests| APP
+        WS -->|Actualizaciones tiempo real| APP
+        APP -->|Persiste datos| DB
+        APP -->|Cache| CACHE
+        APP -->|Eventos| MQ
+        
+        subgraph "Externos"
+            OTHER[Otros Servicios]
+            MQ -->|Notifica| OTHER
+        end
+    end 

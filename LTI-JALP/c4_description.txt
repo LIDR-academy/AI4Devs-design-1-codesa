@@ -1,0 +1,21 @@
+1. Nivel 1: Contexto
+   - Muestra la interacción del Application Service con usuarios y sistemas externos
+   - Define los límites del sistema y actores principales
+   - Establece el flujo general de información
+
+2. Nivel 2: Contenedores
+   - API REST: Interfaz principal para interacciones sincrónicas
+   - WebSocket Server: Manejo de actualizaciones en tiempo real
+   - Application Core: Lógica de negocio principal
+   - Message Queue: Sistema de mensajería para eventos
+   - Bases de datos y caché para persistencia
+
+3. Nivel 3: Componentes del Application Core
+   - Application Controller: Punto de entrada y coordinación
+   - Pipeline Service: Gestión del flujo de aplicaciones
+   - Scoring Service: Evaluación y ranking de candidatos
+   - Workflow Engine: Motor de flujos de trabajo
+   - Notification Manager: Gestión de comunicaciones
+   - Report Manager: Generación de reportes
+   - Domain Layer: Lógica de negocio y validaciones
+   - Data Layer: Acceso a datos y caché 

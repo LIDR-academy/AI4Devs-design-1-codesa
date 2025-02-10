@@ -1,0 +1,86 @@
+erDiagram
+    Company ||--o{ Job : "publica"
+    Company {
+        int company_id PK
+        string name
+        string industry
+        string location
+        json contact_info
+        datetime created_at
+        boolean is_active
+    }
+
+    Job ||--o{ Application : "recibe"
+    Job {
+        int job_id PK
+        int company_id FK
+        string title
+        text description
+        string requirements
+        string location
+        enum status
+        float salary_range
+        datetime posted_date
+        datetime closing_date
+    }
+
+    Candidate ||--o{ Application : "realiza"
+    Candidate {
+        int candidate_id PK
+        string first_name
+        string last_name
+        string email
+        string phone
+        json resume_data
+        text professional_summary
+        datetime registered_date
+        json skills
+    }
+
+    Application ||--o{ Interview : "genera"
+    Application {
+        int application_id PK
+        int job_id FK
+        int candidate_id FK
+        enum status
+        float ai_score
+        datetime applied_date
+        json screening_results
+        text internal_notes
+    }
+
+    Interview {
+        int interview_id PK
+        int application_id FK
+        int interviewer_id FK
+        datetime schedule_date
+        enum status
+        json feedback
+        float rating
+        text notes
+    }
+
+    User ||--o{ Interview : "conduce"
+    User {
+        int user_id PK
+        int company_id FK
+        string first_name
+        string last_name
+        string email
+        enum role
+        string department
+        datetime created_at
+    }
+
+    Evaluation {
+        int evaluation_id PK
+        int application_id FK
+        int evaluator_id FK
+        json criteria_scores
+        text comments
+        datetime created_at
+        float overall_score
+    }
+
+    Application ||--o{ Evaluation : "tiene"
+    User ||--o{ Evaluation : "realiza" 

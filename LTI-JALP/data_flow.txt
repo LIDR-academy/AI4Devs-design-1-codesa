@@ -1,0 +1,23 @@
+1. Ingreso de Datos
+   - Usuarios acceden través de frontends
+   - Requests pasan por API Gateway
+   - Autenticación y autorización
+   - Routing a microservicios apropiados
+
+2. Procesamiento
+   - Microservicios procesan requests
+   - Comunicación asíncrona entre servicios
+   - Procesamiento en background de tareas pesadas
+   - Análisis en tiempo real
+
+3. Almacenamiento
+   - Datos transaccionales en Primary DB
+   - Archivos en File Storage
+   - Datos analíticos en Analytics DB
+   - Caché para datos frecuentes
+
+4. Integración Externa
+   - Comunicación con servicios externos
+   - Webhooks para notificaciones
+   - APIs para integraciones
+   - Sincronización con calendarios 

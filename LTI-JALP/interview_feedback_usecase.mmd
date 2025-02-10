@@ -1,0 +1,13 @@
+graph TD
+    subgraph "Caso de Uso: Proceso de Entrevistas y Feedback"
+    A[Reclutador] -->|Programa| B[Entrevista]
+    B -->|Notifica| C[Candidato]
+    C -->|Confirma| D[Calendario]
+    D -->|Actualiza| E[Estado proceso]
+    E -->|Post-entrevista| F[Formulario feedback]
+    F -->|Completa| G[Evaluador]
+    G -->|Envía| H[Sistema LTI]
+    H -->|Analiza| I[IA scoring]
+    I -->|Actualiza| J[Perfil candidato]
+    J -->|Notifica| A
+    end 

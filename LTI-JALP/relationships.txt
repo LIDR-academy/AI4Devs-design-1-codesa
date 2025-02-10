@@ -1,0 +1,23 @@
+1. Company - Job: One-to-Many
+   - Una empresa puede publicar múltiples vacantes
+   - Cada vacante pertenece a una única empresa
+
+2. Job - Application: One-to-Many
+   - Una vacante puede recibir múltiples postulaciones
+   - Cada postulación corresponde a una única vacante
+
+3. Candidate - Application: One-to-Many
+   - Un candidato puede realizar múltiples postulaciones
+   - Cada postulación corresponde a un único candidato
+
+4. Application - Interview: One-to-Many
+   - Una postulación puede tener múltiples entrevistas
+   - Cada entrevista corresponde a una única postulación
+
+5. Application - Evaluation: One-to-Many
+   - Una postulación puede tener múltiples evaluaciones
+   - Cada evaluación corresponde a una única postulación
+
+6. User - Interview: One-to-Many
+   - Un usuario puede conducir múltiples entrevistas
+   - Cada entrevista tiene un único entrevistador principal 

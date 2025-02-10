@@ -1,0 +1,53 @@
+graph TB
+    subgraph "Arquitectura de Alto Nivel - LTI"
+    
+    subgraph "Frontend Layer"
+        A1[Portal Empresas]
+        A2[Portal Candidatos]
+        A3[Panel Administrativo]
+    end
+
+    subgraph "API Gateway Layer"
+        B1[API Gateway]
+        B2[Load Balancer]
+        B3[Auth Service]
+    end
+
+    subgraph "Microservices Layer"
+        C1[Job Service]
+        C2[Candidate Service]
+        C3[Application Service]
+        C4[Interview Service]
+        C5[Analytics Service]
+        C6[Notification Service]
+        C7[AI Service]
+    end
+
+    subgraph "Data Layer"
+        D1[(Primary DB)]
+        D2[(Analytics DB)]
+        D3[(Cache)]
+        D4[File Storage]
+    end
+
+    subgraph "External Services"
+        E1[Email Provider]
+        E2[Job Boards APIs]
+        E3[Calendar Services]
+        E4[AI Models]
+    end
+
+    %% Conexiones
+    A1 & A2 & A3 --> B1
+    B1 --> B2
+    B2 --> B3
+    B2 --> C1 & C2 & C3 & C4 & C5 & C6 & C7
+    C1 & C2 & C3 & C4 & C5 & C6 & C7 --> D1
+    C5 --> D2
+    C1 & C2 & C3 & C4 --> D3
+    C2 & C3 --> D4
+    C6 --> E1
+    C1 --> E2
+    C4 --> E3
+    C7 --> E4
+    end 

@@ -1,0 +1,37 @@
+Detalles del Application Core:
+
+1. Application Controller
+   - Gestión de requests
+   - Routing de operaciones
+   - Control de acceso
+   - Logging y monitoreo
+
+2. Pipeline Service
+   - Gestión de estados de aplicación
+   - Coordinación de evaluaciones
+   - Tracking de progreso
+   - Reglas de negocio
+
+3. Scoring Service
+   - Algoritmos de evaluación
+   - Integración con IA
+   - Cálculo de match
+   - Análisis de perfil
+
+4. Workflow Engine
+   - Definición de flujos
+   - Automatización de procesos
+   - Reglas de transición
+   - Estados y condiciones
+
+5. Domain Layer
+   - Modelos de negocio
+   - Validaciones
+   - Reglas de dominio
+   - Eventos de dominio
+
+6. Data Layer
+   - Persistencia
+   - Caché
+   - Queries optimizadas
+   - Transacciones 

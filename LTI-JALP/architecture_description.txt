@@ -1,0 +1,30 @@
+1. Frontend Layer (Capa de Presentación)
+   - Portal Empresas: Aplicación web para reclutadores y empresas
+   - Portal Candidatos: Plataforma pública para búsqueda y aplicación a vacantes
+   - Panel Administrativo: Interfaz para gestión y configuración del sistema
+
+2. API Gateway Layer (Capa de Gateway)
+   - API Gateway: Punto único de entrada para todas las peticiones
+   - Load Balancer: Distribución de carga entre servicios
+   - Auth Service: Autenticación y autorización centralizada
+
+3. Microservices Layer (Capa de Microservicios)
+   - Job Service: Gestión de vacantes y publicaciones
+   - Candidate Service: Gestión de perfiles y datos de candidatos
+   - Application Service: Proceso de postulaciones
+   - Interview Service: Gestión de entrevistas y feedback
+   - Analytics Service: Análisis y reportes
+   - Notification Service: Sistema de comunicaciones
+   - AI Service: Servicios de inteligencia artificial
+
+4. Data Layer (Capa de Datos)
+   - Primary DB: Base de datos principal (PostgreSQL)
+   - Analytics DB: Base de datos para análisis (MongoDB)
+   - Cache: Sistema de caché (Redis)
+   - File Storage: Almacenamiento de archivos (S3)
+
+5. External Services (Servicios Externos)
+   - Email Provider: Servicio de correos
+   - Job Boards APIs: Integración con bolsas de trabajo
+   - Calendar Services: Integración con calendarios
+   - AI Models: Modelos de IA externos 

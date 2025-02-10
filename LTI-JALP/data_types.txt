@@ -1,0 +1,17 @@
+1. Tipos Básicos:
+   - int: Identificadores y claves foráneas
+   - string: Textos cortos (nombres, emails)
+   - text: Textos largos (descripciones)
+   - datetime: Fechas y timestamps
+   - boolean: Valores verdadero/falso
+   - float: Valores numéricos con decimales
+
+2. Tipos Complejos:
+   - json: Estructuras de datos flexibles
+   - enum: Valores predefinidos (estados, roles)
+
+3. Estados (enum):
+   - Job Status: [DRAFT, PUBLISHED, CLOSED]
+   - Application Status: [PENDING, SCREENING, INTERVIEWING, OFFERED, REJECTED, HIRED]
+   - Interview Status: [SCHEDULED, COMPLETED, CANCELLED]
+   - User Role: [ADMIN, RECRUITER, INTERVIEWER, HIRING_MANAGER] 
