@@ -1,0 +1,53 @@
+---
+title: Casos de Uso Principales - LTI ATS
+---
+flowchart TD
+    subgraph Actores
+    HR[HR Manager]
+    HM[Hiring Manager]
+    AI[Sistema IA]
+    C[Candidato]
+    end
+    
+    subgraph CU1[Caso de Uso 1: Gestión de Ofertas]
+    P1[Crear oferta]
+    P2[Revisar oferta]
+    P3[Publicar oferta]
+    P4[Monitorizar aplicaciones]
+    
+    HR --> P1
+    HM --> P2
+    HR --> P3
+    AI --> P3
+    HR --> P4
+    AI --> P4
+    end
+    
+    subgraph CU2[Caso de Uso 2: Evaluación de Candidatos]
+    E1[Recibir CV]
+    E2[Análisis IA]
+    E3[Ranking candidatos]
+    E4[Decisión shortlist]
+    
+    C --> E1
+    AI --> E2
+    AI --> E3
+    HR --> E4
+    HM --> E4
+    end
+    
+    subgraph CU3[Caso de Uso 3: Proceso de Entrevistas]
+    I1[Programar entrevista]
+    I2[Realizar entrevista]
+    I3[Evaluar candidato]
+    I4[Tomar decisión]
+    
+    HR --> I1
+    AI --> I1
+    HM --> I2
+    HR --> I2
+    HM --> I3
+    HR --> I3
+    HM --> I4
+    HR --> I4
+    end
