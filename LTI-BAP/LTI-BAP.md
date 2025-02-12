@@ -186,7 +186,7 @@ Transforma la forma en que las empresas **atraen, desarrollan y retienen** a sus
 
 ## DIAGRAMAS DE CASO DE USO (PLANUML)
 
-```
+```plantuml
 @startuml
 
 ' Definición de actores principales
