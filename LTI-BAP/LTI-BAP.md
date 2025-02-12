@@ -277,7 +277,6 @@ Retencion ..> OptimizacionRetencion : <<include>>
 Promocion ..> Desarrollo : <<extend>>
 
 @enduml
-
 ```
 
 
