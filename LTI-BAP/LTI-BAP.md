@@ -186,6 +186,8 @@ Transforma la forma en que las empresas **atraen, desarrollan y retienen** a sus
 
 ## DIAGRAMAS DE CASO DE USO (PLANUML)
 
+![DIagrama de casos de uso](<casos de uso.png>)
+
 ```plantuml
 @startuml
 
@@ -278,7 +280,6 @@ Promocion ..> Desarrollo : <<extend>>
 
 @enduml
 ```
-
 
 ## DIAGRAMA MER (MERMEID)
 
