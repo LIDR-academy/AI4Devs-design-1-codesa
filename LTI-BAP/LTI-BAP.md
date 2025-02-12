@@ -417,7 +417,7 @@ Este modelo de datos proporciona una **estructura sólida y escalable** para ges
 
 ## 📌 Diagrama ER en merdmeid
 
-```
+```merdmeid
 erDiagram
     USUARIOS {
         int usuario_id PK
